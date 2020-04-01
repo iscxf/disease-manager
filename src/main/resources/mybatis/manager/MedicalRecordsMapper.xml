@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.app.manager.dao.MedicalRecordsDao">
+
+	<select id="get" resultType="com.app.manager.domain.MedicalRecordsDO">
+		select `id`,`identity`,`name`,`height`,`weight`,`systolic_pressure`,`diastolic_pressure`,`fasting_blood_glucose`,`postprandial_blood_glucose`,`total_cholesterol`,`triglyceride`,`symptom`,`create_time`,`update_time` from medical_records where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.app.manager.domain.MedicalRecordsDO">
+		select `id`,`identity`,`name`,`height`,`weight`,`systolic_pressure`,`diastolic_pressure`,`fasting_blood_glucose`,`postprandial_blood_glucose`,`total_cholesterol`,`triglyceride`,`symptom`,`create_time`,`update_time` from medical_records
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="identity != null and identity != ''"> and identity = #{identity} </if>
+			      <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="height != null and height != ''"> and height = #{height} </if>
+		  		  <if test="weight != null and weight != ''"> and weight = #{weight} </if>
+		  		  <if test="systolicPressure != null and systolicPressure != ''"> and systolic_pressure = #{systolicPressure} </if>
+		  		  <if test="diastolicPressure != null and diastolicPressure != ''"> and diastolic_pressure = #{diastolicPressure} </if>
+		  		  <if test="fastingBloodGlucose != null and fastingBloodGlucose != ''"> and fasting_blood_glucose = #{fastingBloodGlucose} </if>
+		  		  <if test="postprandialBloodGlucose != null and postprandialBloodGlucose != ''"> and postprandial_blood_glucose = #{postprandialBloodGlucose} </if>
+		  		  <if test="totalCholesterol != null and totalCholesterol != ''"> and total_cholesterol = #{totalCholesterol} </if>
+		  		  <if test="triglyceride != null and triglyceride != ''"> and triglyceride = #{triglyceride} </if>
+		  		  <if test="symptom != null and symptom != ''"> and symptom = #{symptom} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from medical_records
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="identity != null and identity != ''"> and identity = #{identity} </if>
+			      <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="height != null and height != ''"> and height = #{height} </if>
+		  		  <if test="weight != null and weight != ''"> and weight = #{weight} </if>
+		  		  <if test="systolicPressure != null and systolicPressure != ''"> and systolic_pressure = #{systolicPressure} </if>
+		  		  <if test="diastolicPressure != null and diastolicPressure != ''"> and diastolic_pressure = #{diastolicPressure} </if>
+		  		  <if test="fastingBloodGlucose != null and fastingBloodGlucose != ''"> and fasting_blood_glucose = #{fastingBloodGlucose} </if>
+		  		  <if test="postprandialBloodGlucose != null and postprandialBloodGlucose != ''"> and postprandial_blood_glucose = #{postprandialBloodGlucose} </if>
+		  		  <if test="totalCholesterol != null and totalCholesterol != ''"> and total_cholesterol = #{totalCholesterol} </if>
+		  		  <if test="triglyceride != null and triglyceride != ''"> and triglyceride = #{triglyceride} </if>
+		  		  <if test="symptom != null and symptom != ''"> and symptom = #{symptom} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.app.manager.domain.MedicalRecordsDO" useGeneratedKeys="true" keyProperty="id">
+		insert into medical_records
+		(
+			`identity`,
+			`name`,
+			`height`, 
+			`weight`, 
+			`systolic_pressure`, 
+			`diastolic_pressure`, 
+			`fasting_blood_glucose`, 
+			`postprandial_blood_glucose`, 
+			`total_cholesterol`, 
+			`triglyceride`, 
+			`symptom`
+		)
+		values
+		(
+			#{identity},
+			#{name},
+			#{height}, 
+			#{weight}, 
+			#{systolicPressure}, 
+			#{diastolicPressure}, 
+			#{fastingBloodGlucose}, 
+			#{postprandialBloodGlucose}, 
+			#{totalCholesterol}, 
+			#{triglyceride}, 
+			#{symptom}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.app.manager.domain.MedicalRecordsDO">
+		update medical_records 
+		<set>
+			<if test="identity != null">`identity` = #{identity}, </if>
+			<if test="name != null and name != ''">`name` = #{name} </if>
+			<if test="height != null">`height` = #{height}, </if>
+			<if test="weight != null">`weight` = #{weight}, </if>
+			<if test="systolicPressure != null">`systolic_pressure` = #{systolicPressure}, </if>
+			<if test="diastolicPressure != null">`diastolic_pressure` = #{diastolicPressure}, </if>
+			<if test="fastingBloodGlucose != null">`fasting_blood_glucose` = #{fastingBloodGlucose}, </if>
+			<if test="postprandialBloodGlucose != null">`postprandial_blood_glucose` = #{postprandialBloodGlucose}, </if>
+			<if test="totalCholesterol != null">`total_cholesterol` = #{totalCholesterol}, </if>
+			<if test="triglyceride != null">`triglyceride` = #{triglyceride}, </if>
+			<if test="symptom != null">`symptom` = #{symptom}, </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from medical_records where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from medical_records where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

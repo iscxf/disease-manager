@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<meta charset="utf-8">
+<head th:include="include :: header">
+	<link rel="stylesheet" href="/js/plugins/layer/laydate/skins/default/laydate.css" />
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="id" name="id" th:value="${health.id}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">名称：</label>
+								<div class="col-sm-8">
+									<input id="name" name="name" th:value="${health.name}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">身份证号码：</label>
+								<div class="col-sm-8">
+									<input id="identity" name="identity" th:value="${health.identity}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">性别：</label>
+								<div class="gg-formDetail">
+									<div class="radio i-checks">
+										<div class="radio-inline">
+											    <label><input name="sex" type="radio" value="男"  th:field="*{health.sex}"/>男</label>
+											    </div>
+										    <div class="radio-inline">
+										    <label><input name="sex" type="radio" value="女"  th:field="*{health.sex}"/>女</label>
+										        </div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">出生日期：</label>
+								<div class="col-sm-8">
+									<input type="text" class="laydate-icon layer-date form-control" id="birth" name="birth" th:value="${health.birth}==null?null:${#dates.format(health.birth,'yyyy-MM-dd')}" placeholder="请选择出生年月"
+										   onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" style="background-color: #fff;" />
+								</div>
+							</div>
+
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">身高：</label>
+								<div class="col-sm-5 input-group" style="padding-left: 15px;">
+									<input id="height" name="height" th:value="${health.height}" class="form-control" type="text">
+									<span class="input-group-addon">cm</span>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">体重：</label>
+								<div class="col-sm-5 input-group" style="padding-left: 15px;">
+									<input id="weight" name="weight" th:value="${health.weight}" class="form-control" type="text">
+									<span class="input-group-addon">kg</span>
+								</div>
+							</div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">收缩压：</label>
+                                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                                    <input id="systolicPressure" name="systolicPressure" th:value="${health.systolicPressure}" class="form-control" type="text">
+                                    <span class="input-group-addon">mmHg</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">舒张压：</label>
+                                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                                    <input id="diastolicPressure" name="diastolicPressure" th:value="${health.diastolicPressure}" class="form-control" type="text">
+                                    <span class="input-group-addon">mmol/l</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">血脂总胆固醇：</label>
+                                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                                    <input id="totalCholesterol" name="totalCholesterol" th:value="${health.totalCholesterol}" class="form-control" type="text">
+                                    <span class="input-group-addon">mmol/l</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">甘油三酯：</label>
+                                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                                    <input id="triglyceride" name="triglyceride" th:value="${health.triglyceride}" class="form-control" type="text">
+                                    <span class="input-group-addon">mmHg</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">空腹血糖：</label>
+                                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                                    <input id="fastingBloodGlucose" name="fastingBloodGlucose" th:value="${health.fastingBloodGlucose}" class="form-control" type="text">
+                                    <span class="input-group-addon">mmol/l</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">餐后血糖：</label>
+                                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                                    <input id="postprandialBloodGlucose" name="postprandialBloodGlucose" th:value="${health.postprandialBloodGlucose}" class="form-control" type="text">
+                                    <span class="input-group-addon">mmHg</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">联系电话：</label>
+                                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                                    <span class="input-group-addon">+86</span>
+                                    <input id="moblie" name="moblie" th:value="${health.moblie}" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">平均吸烟 (支/天)：</label>
+                                <div class="col-sm-8">
+                                    <input id="averageSmoking" name="averageSmoking" th:value="${health.averageSmoking}" class="form-control" type="text">
+                                </div>
+                            </div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">详细地址：</label>
+								<div class="col-sm-8">
+									<input id="address" name="address" th:value="${health.address}" class="form-control" type="text">
+								</div>
+							</div>
+
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">文化程度：</label>
+								<div class="col-sm-8">
+									<!--<input id="educationalLevel" name="educationalLevel" th:value="${health.educationalLevel}" class="form-control" type="text">-->
+									<select name="educationalLevel" id="educationalLevel" class="form-control" >
+										<option value="未知" th:field="*{health.educationalLevel}">未知</option>
+						        <option value="硕士或以上" th:field="*{health.educationalLevel}">硕士或以上</option>
+						        <option value="本科" th:field="*{health.educationalLevel}">本科</option>
+						        <option value="专科" th:field="*{health.educationalLevel}">专科</option>
+						        <option value="高中" th:field="*{health.educationalLevel}">高中</option>
+										<option value="高中以下" th:field="*{health.educationalLevel}">高中以下</option>
+									</select>
+								</div>
+								 
+
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">婚姻状况：</label>
+								<div class="col-sm-8">
+									<!--<input id="maritalStatus" name="maritalStatus" th:value="${health.maritalStatus}" class="form-control" type="text">-->
+									<select name="maritalStatus" id="maritalStatus" class="form-control" >
+										<option value="未知" th:field="*{health.maritalStatus}">未知</option>
+										<option value="未婚" th:field="*{health.maritalStatus}">未婚</option>
+										<option value="已婚" th:field="*{health.maritalStatus}">已婚</option>
+									</select>
+								</div>
+							</div>
+
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">是否糖尿病：</label>
+								<div class="col-sm-8">
+									<!--<input id="whetherDiabetes" name="whetherDiabetes" th:value="${health.whetherDiabetes}" class="form-control" type="text">-->
+									<div class="gg-formDetail">
+										<div class="radio i-checks">
+											<!--<label class="radio-inline">-->
+											<!--<input th:field="*{health.sex}" type="radio" name="sex" th:value="${health.sex}"/>-->
+											<!--</label>-->
+											<div class="radio-inline">
+										    <label><input name="whetherDiabetes" type="radio" value="1"  th:field="*{health.whetherDiabetes}"/>是</label>
+											</div>
+									    <div class="radio-inline">
+									    	<label><input name="whetherDiabetes" type="radio" value="0"  th:field="*{health.whetherDiabetes}"/>否</label>
+									    </div>
+										</div>
+									</div>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">过厚皮脂：</label>
+								<div class="col-sm-8">
+									<!--<input id="thickSebum" name="thickSebum" th:value="${health.thickSebum}" class="form-control" type="text">-->
+									<div class="gg-formDetail">
+										<div class="radio i-checks">
+											<!--<label class="radio-inline">-->
+											<!--<input th:field="*{health.sex}" type="radio" name="sex" th:value="${health.sex}"/>-->
+											<!--</label>-->
+											<div class="radio-inline">
+												    <label><input name="thickSebum" type="radio" value="1"  th:field="*{health.thickSebum}"/>是</label>
+											</div>
+											    <div class="radio-inline">
+											    	<label><input name="thickSebum" type="radio" value="0"  th:field="*{health.thickSebum}"/>否</label>
+											    </div>
+										</div>
+									</div>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<!--<div class="col-sm-8">-->
+									<!--<input id="createTime" name="createTime" th:value="${health.createTime}" class="form-control" type="text">-->
+								<!--</div>-->
+								<div class="col-sm-8">
+									<input type="text" class="laydate-icon layer-date form-control" id="createTime" name="createTime" th:value="${health.createTime}==null?null:${#dates.format(health.createTime,'yyyy-MM-dd HH:mm:ss')}"
+										    style="background-color: #fff;" readonly="readonly"/>
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<!--<div class="col-sm-8">-->
+									<!--<input id="updateTime" name="updateTime" th:value="${health.updateTime}" class="form-control" type="text">-->
+								<!--</div>-->
+								<div class="col-sm-8">
+									<input type="text" class="laydate-icon layer-date form-control" id="updateTime" name="updateTime" th:value="${health.updateTime}==null?null:${#dates.format(health.updateTime,'yyyy-MM-dd HH:mm:ss')}"
+										   style="background-color: #fff;" readonly="readonly"/>
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/manager/health/edit.js"></script>
+	<script type="text/javascript" src="/js/plugins/layer/laydate/laydate.js" ></script>
+	<script type="text/javascript" src="/js/plugins/distpicker/distpicker.data.min.js"></script>
+	<script type="text/javascript" src="/js/plugins/distpicker/distpicker.min.js"></script>
+</body>
+</html>

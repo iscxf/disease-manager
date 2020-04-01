@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <h3 class="text-center">算法预测管理</h3>
+    <div class="row">
+    <div class="col-sm-6">
+        <form class="form-horizontal m-t" id="signupForm">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">
+                </label>
+                <button type="button" class="btn  btn-info"
+                        onclick="searchPersonal()">
+                    <i class="fa fa-search" aria-hidden="true"></i>从居民信息中选择
+                </button>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">性别：</label>
+                <div class="gg-formDetail">
+                    <div class="radio i-checks">
+                        <div class="radio-inline">
+                                <label><input name="sex" type="radio" value="男" />男</label>
+                                </div>
+                            <div class="radio-inline">
+                            <label><input name="sex" type="radio" value="女" />女</label>
+                                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">收缩压：</label>
+                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                    <input id="systolicPressure" name="systolicPressure" class="form-control" type="text">
+                    <span class="input-group-addon">mmHg</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">舒张压：</label>
+                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                    <input id="diastolicPressure" name="diastolicPressure" class="form-control" type="text">
+                    <span class="input-group-addon">mmHg</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">血脂总胆固醇：</label>
+                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                    <input id="totalCholesterol" name="totalCholesterol" class="form-control" type="text">
+                    <span class="input-group-addon">mmol/l</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">甘油三酯：</label>
+                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                    <input id="triglyceride" name="triglyceride" class="form-control" type="text">
+                    <span class="input-group-addon">mmol/l</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">空腹血糖：</label>
+                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                    <input id="fastingBloodGlucose" name="fastingBloodGlucose" class="form-control" type="text">
+                    <span class="input-group-addon">mmol/l</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">餐后血糖：</label>
+                <div class="col-sm-5 input-group" style="padding-left: 15px;">
+                    <input id="postprandialBloodGlucose" name="postprandialBloodGlucose" class="form-control" type="text">
+                    <span class="input-group-addon">mmol/l</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">过厚皮脂：</label>
+                <div class="col-sm-8">
+                    <div class="gg-formDetail">
+                        <div class="radio i-checks">
+                            <div class="radio-inline">
+                                    <label><input name="thickSebum" type="radio" value="1"  />是</label>
+                            </div>
+                                <div class="radio-inline">
+                                	<label><input name="thickSebum" type="radio" value="0"  />否</label>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">是否家族遗传：</label>
+                <div class="col-sm-8">
+                    <div class="gg-formDetail">
+                        <div class="radio i-checks">
+                            <div class="radio-inline">
+                                    <label><input name="familialInheritance" type="radio" value="1"  />是</label>
+                            </div>
+                                <div class="radio-inline">
+                                	<label><input name="familialInheritance" type="radio" value="0"  />否</label>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">其他症状：</label>
+                <div class="col-sm-6">
+                    <textarea id="symptom" name="symptom"  class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-3">
+                    <button type="submit" class="btn btn-primary">提交数据预测</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-6">
+        <div id="ajaxHtml">
+            <h4 class="text-center">预测结果</h4>
+            <div id="ajaxHtmlResult">
+
+            </div>
+            <div id="disease_content_div">
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+</div>
+
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/manager/chronic/algorithmicPrediction.js"></script>
+</body>
+</html>

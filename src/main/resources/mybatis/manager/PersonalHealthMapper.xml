@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.app.manager.dao.PersonalHealthDao">
+
+	<select id="get" resultType="com.app.manager.domain.PersonalHealthDo">
+		select `id`,`name`,`identity`,`sex`,`birth`,`average_smoking`,`height`,`weight`,`bmi`,`address`,`moblie`,`educational_level`,`marital_status`,`systolic_pressure`,`diastolic_pressure`,`fasting_blood_glucose`,`postprandial_blood_glucose`,`whether_diabetes`,`familial_inheritance`,`total_cholesterol`,`triglyceride`,`thick_sebum`,`create_time`,`update_time` from personal_health where id = #{value}
+	</select>
+
+    <select id="getPatientInfo" resultType="com.app.manager.domain.PersonalHealthDo" parameterType="String">
+		select `name`,`identity` from personal_health
+		<where>
+			<if test="identity != null and identity != ''"> identity LIKE `%${identity}%` </if>
+		</where>
+	</select>
+
+	<select id="list" resultType="com.app.manager.domain.PersonalHealthDo">
+		select `id`,`name`,`identity`,`sex`,`birth`,`average_smoking`,`height`,`weight`,`bmi`,`address`,`moblie`,`educational_level`,`marital_status`,`systolic_pressure`,`diastolic_pressure`,`fasting_blood_glucose`,`postprandial_blood_glucose`,`whether_diabetes`,`familial_inheritance`,`total_cholesterol`,`triglyceride`,`thick_sebum`,`create_time`,`update_time` from personal_health
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+				  <if test="identity != null and identity != ''"> identity LIKE CONCAT('%',#{identity},'%') </if>
+		  		  <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+		  		  <if test="birth != null and birth != ''"> and birth = #{birth} </if>
+		  		  <if test="averageSmoking != null and averageSmoking != ''"> and average_smoking = #{averageSmoking} </if>
+		  		  <if test="height != null and height != ''"> and height = #{height} </if>
+		  		  <if test="weight != null and weight != ''"> and weight = #{weight} </if>
+		  		  <if test="bmi != null and bmi != ''"> and bmi = #{bmi} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="moblie != null and moblie != ''"> and moblie = #{moblie} </if>
+		  		  <if test="educationalLevel != null and educationalLevel != ''"> and educational_level = #{educationalLevel} </if>
+		  		  <if test="maritalStatus != null and maritalStatus != ''"> and marital_status = #{maritalStatus} </if>
+		  		  <if test="systolicPressure != null and systolicPressure != ''"> and systolic_pressure >= #{systolicPressure} </if>
+		  		  <if test="diastolicPressure != null and diastolicPressure != ''"> and diastolic_pressure >= #{diastolicPressure} </if>
+		  		  <if test="fastingBloodGlucose != null and fastingBloodGlucose != ''"> and fasting_blood_glucose >= #{fastingBloodGlucose} </if>
+		  		  <if test="postprandialBloodGlucose != null and postprandialBloodGlucose != ''"> and postprandial_blood_glucose >= #{postprandialBloodGlucose} </if>
+		  		  <if test="whetherDiabetes != null and whetherDiabetes != ''"> and whether_diabetes = #{whetherDiabetes} </if>
+		  		  <if test="thickSebum != null and thickSebum != ''"> and thick_sebum = #{thickSebum} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from personal_health
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="identity != null and identity != ''"> and identity = #{identity} </if>
+		  		  <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+		  		  <if test="birth != null and birth != ''"> and birth = #{birth} </if>
+		  		  <if test="averageSmoking != null and averageSmoking != ''"> and average_smoking = #{averageSmoking} </if>
+		  		  <if test="height != null and height != ''"> and height = #{height} </if>
+		  		  <if test="weight != null and weight != ''"> and weight = #{weight} </if>
+		  		  <if test="bmi != null and bmi != ''"> and bmi = #{bmi} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="moblie != null and moblie != ''"> and moblie = #{moblie} </if>
+		  		  <if test="educationalLevel != null and educationalLevel != ''"> and educational_level = #{educationalLevel} </if>
+		  		  <if test="maritalStatus != null and maritalStatus != ''"> and marital_status = #{maritalStatus} </if>
+				 <if test="systolicPressure != null and systolicPressure != ''"> and systolic_pressure >= #{systolicPressure} </if>
+				 <if test="diastolicPressure != null and diastolicPressure != ''"> and diastolic_pressure >= #{diastolicPressure} </if>
+				 <if test="fastingBloodGlucose != null and fastingBloodGlucose != ''"> and fasting_blood_glucose >= #{fastingBloodGlucose} </if>
+				 <if test="postprandialBloodGlucose != null and postprandialBloodGlucose != ''"> and postprandial_blood_glucose >= #{postprandialBloodGlucose} </if>
+		  		  <if test="whetherDiabetes != null and whetherDiabetes != ''"> and whether_diabetes = #{whetherDiabetes} </if>
+		  		  <if test="thickSebum != null and thickSebum != ''"> and thick_sebum = #{thickSebum} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.app.manager.domain.PersonalHealthDo" useGeneratedKeys="true" keyProperty="id">
+		insert into personal_health
+		(
+			`name`, 
+			`identity`, 
+			`sex`, 
+			`birth`, 
+			`average_smoking`, 
+			`height`, 
+			`weight`, 
+			`bmi`,
+			`address`, 
+			`moblie`,
+			`educational_level`, 
+			`marital_status`,
+			`systolic_pressure`, 
+			`diastolic_pressure`, 
+			`fasting_blood_glucose`, 
+			`postprandial_blood_glucose`, 
+			`whether_diabetes`,
+			`familial_inheritance`,
+			`thick_sebum`,
+			`total_cholesterol`,
+			`triglyceride`
+		)
+		values
+		(
+			#{name}, 
+			#{identity}, 
+			#{sex}, 
+			#{birth}, 
+			#{averageSmoking}, 
+			#{height}, 
+			#{weight}, 
+			#{bmi},
+			#{address}, 
+			#{moblie},
+			#{educationalLevel}, 
+			#{maritalStatus},
+			#{systolicPressure}, 
+			#{diastolicPressure}, 
+			#{fastingBloodGlucose}, 
+			#{postprandialBloodGlucose}, 
+			#{whetherDiabetes},
+			#{familialInheritance},
+			#{thickSebum},
+			#{totalCholesterol},
+			#{triglyceride}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.app.manager.domain.PersonalHealthDo">
+		update personal_health 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="identity != null">`identity` = #{identity}, </if>
+			<if test="sex != null">`sex` = #{sex}, </if>
+			<if test="birth != null">`birth` = #{birth}, </if>
+			<if test="averageSmoking != null">`average_smoking` = #{averageSmoking}, </if>
+			<if test="height != null">`height` = #{height}, </if>
+			<if test="weight != null">`weight` = #{weight}, </if>
+			<if test="bmi != null">`bmi` = #{bmi}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="moblie != null">`moblie` = #{moblie}, </if>
+			<if test="educationalLevel != null">`educational_level` = #{educationalLevel}, </if>
+			<if test="maritalStatus != null">`marital_status` = #{maritalStatus}, </if>
+			<if test="systolicPressure != null">`systolic_pressure` = #{systolicPressure}, </if>
+			<if test="diastolicPressure != null">`diastolic_pressure` = #{diastolicPressure}, </if>
+			<if test="fastingBloodGlucose != null">`fasting_blood_glucose` = #{fastingBloodGlucose}, </if>
+			<if test="postprandialBloodGlucose != null">`postprandial_blood_glucose` = #{postprandialBloodGlucose}, </if>
+			<if test="whetherDiabetes != null">`whether_diabetes` = #{whetherDiabetes}, </if>
+			<if test="familialInheritance != null">`familial_inheritance` = #{familialInheritance}, </if>
+			<if test="totalCholesterol != null">`total_cholesterol` = #{totalCholesterol}, </if>
+			<if test="triglyceride != null">`triglyceride` = #{triglyceride}, </if>
+			<if test="thickSebum != null">`thick_sebum` = #{thickSebum}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="updateByIdentity" parameterType="com.app.manager.domain.PersonalHealthDo">
+		update personal_health
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="sex != null">`sex` = #{sex}, </if>
+			<if test="birth != null">`birth` = #{birth}, </if>
+			<if test="averageSmoking != null">`average_smoking` = #{averageSmoking}, </if>
+			<if test="height != null">`height` = #{height}, </if>
+			<if test="weight != null">`weight` = #{weight}, </if>
+			<if test="bmi != null">`bmi` = #{bmi}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="moblie != null">`moblie` = #{moblie}, </if>
+			<if test="educationalLevel != null">`educational_level` = #{educationalLevel}, </if>
+			<if test="maritalStatus != null">`marital_status` = #{maritalStatus}, </if>
+			<if test="systolicPressure != null">`systolic_pressure` = #{systolicPressure}, </if>
+			<if test="diastolicPressure != null">`diastolic_pressure` = #{diastolicPressure}, </if>
+			<if test="fastingBloodGlucose != null">`fasting_blood_glucose` = #{fastingBloodGlucose}, </if>
+			<if test="postprandialBloodGlucose != null">`postprandial_blood_glucose` = #{postprandialBloodGlucose}, </if>
+			<if test="whetherDiabetes != null">`whether_diabetes` = #{whetherDiabetes}, </if>
+			<if test="familialInheritance != null">`familial_inheritance` = #{familialInheritance}, </if>
+			<if test="totalCholesterol != null">`total_cholesterol` = #{totalCholesterol}, </if>
+			<if test="triglyceride != null">`triglyceride` = #{triglyceride}, </if>
+			<if test="thickSebum != null">`thick_sebum` = #{thickSebum}, </if>
+		</set>
+		where identity = #{identity}
+	</update>
+	
+	<delete id="remove">
+		delete from personal_health where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from personal_health where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+
+	<select id="fetchData" resultType="com.app.manager.domain.PersonalHealthDo">
+	select `sex`,`systolic_pressure`,`diastolic_pressure`,`fasting_blood_glucose`,`postprandial_blood_glucose`,`whether_diabetes`,`familial_inheritance`,`total_cholesterol`,`triglyceride`,`thick_sebum`from personal_health
+	<where>
+	</where>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.app.manager.dao.DiseaseDao">
+
+	<select id="get" resultType="com.app.manager.domain.DiseaseDO">
+		select `id`,`disease`,`field`,`general`,`symptom`,`reason`,`diagnosis`,`treatment`,`life`,`prevention`,`doctors`,`hospitals` from disease where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.app.manager.domain.DiseaseDO">
+		select `id`,`disease`,`field`,`general`,`symptom`,`reason`,`diagnosis`,`treatment`,`life`,`prevention`,`doctors`,`hospitals` from disease
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="disease != null and disease != ''"> and disease = #{disease} </if>
+		  		  <if test="field != null and field != ''"> and field = #{field} </if>
+		  		  <if test="general != null and general != ''"> and general = #{general} </if>
+		  		  <if test="symptom != null and symptom != ''"> and symptom = #{symptom} </if>
+		  		  <if test="reason != null and reason != ''"> and reason = #{reason} </if>
+		  		  <if test="diagnosis != null and diagnosis != ''"> and diagnosis = #{diagnosis} </if>
+		  		  <if test="treatment != null and treatment != ''"> and treatment = #{treatment} </if>
+		  		  <if test="life != null and life != ''"> and life = #{life} </if>
+		  		  <if test="prevention != null and prevention != ''"> and prevention = #{prevention} </if>
+		  		  <if test="doctors != null and doctors != ''"> and doctors = #{doctors} </if>
+		  		  <if test="hospitals != null and hospitals != ''"> and hospitals = #{hospitals} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from disease
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="disease != null and disease != ''"> and disease = #{disease} </if>
+		  		  <if test="field != null and field != ''"> and field = #{field} </if>
+		  		  <if test="general != null and general != ''"> and general = #{general} </if>
+		  		  <if test="symptom != null and symptom != ''"> and symptom = #{symptom} </if>
+		  		  <if test="reason != null and reason != ''"> and reason = #{reason} </if>
+		  		  <if test="diagnosis != null and diagnosis != ''"> and diagnosis = #{diagnosis} </if>
+		  		  <if test="treatment != null and treatment != ''"> and treatment = #{treatment} </if>
+		  		  <if test="life != null and life != ''"> and life = #{life} </if>
+		  		  <if test="prevention != null and prevention != ''"> and prevention = #{prevention} </if>
+		  		  <if test="doctors != null and doctors != ''"> and doctors = #{doctors} </if>
+		  		  <if test="hospitals != null and hospitals != ''"> and hospitals = #{hospitals} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.app.manager.domain.DiseaseDO" useGeneratedKeys="true" keyProperty="id">
+		insert into disease
+		(
+			`disease`, 
+			`field`, 
+			`general`, 
+			`symptom`, 
+			`reason`, 
+			`diagnosis`, 
+			`treatment`, 
+			`life`, 
+			`prevention`, 
+			`doctors`, 
+			`hospitals`
+		)
+		values
+		(
+			#{disease}, 
+			#{field}, 
+			#{general}, 
+			#{symptom}, 
+			#{reason}, 
+			#{diagnosis}, 
+			#{treatment}, 
+			#{life}, 
+			#{prevention}, 
+			#{doctors}, 
+			#{hospitals}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.app.manager.domain.DiseaseDO">
+		update disease 
+		<set>
+			<if test="disease != null">`disease` = #{disease}, </if>
+			<if test="field != null">`field` = #{field}, </if>
+			<if test="general != null">`general` = #{general}, </if>
+			<if test="symptom != null">`symptom` = #{symptom}, </if>
+			<if test="reason != null">`reason` = #{reason}, </if>
+			<if test="diagnosis != null">`diagnosis` = #{diagnosis}, </if>
+			<if test="treatment != null">`treatment` = #{treatment}, </if>
+			<if test="life != null">`life` = #{life}, </if>
+			<if test="prevention != null">`prevention` = #{prevention}, </if>
+			<if test="doctors != null">`doctors` = #{doctors}, </if>
+			<if test="hospitals != null">`hospitals` = #{hospitals}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from disease where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from disease where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

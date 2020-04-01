@@ -1,0 +1,46 @@
+package com.app.system.service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.app.system.vo.UserVO;
+import org.springframework.stereotype.Service;
+
+import com.app.common.domain.Tree;
+import com.app.system.domain.DeptDO;
+import com.app.system.domain.UserDO;
+import org.springframework.web.multipart.MultipartFile;
+
+@Service
+public interface UserService {
+	UserDO get(Long id);
+
+	List<UserDO> list(Map<String, Object> map);
+
+	int count(Map<String, Object> map);
+
+	int save(UserDO user);
+
+	int update(UserDO user);
+
+	int remove(Long userId);
+
+	int batchremove(Long[] userIds);
+
+	boolean exit(Map<String, Object> params);
+
+	Set<String> listRoles(Long userId);
+
+	int resetPwd(UserVO userVO,UserDO userDO) throws Exception;
+	int adminResetPwd(UserVO userVO) throws Exception;
+	Tree<DeptDO> getTree();
+
+	/**
+	 * 更新个人信息
+	 * @param userDO
+	 * @return
+	 */
+	int updatePersonal(UserDO userDO);
+
+}
