@@ -8,8 +8,7 @@ import java.util.Date;
 /**
  * 
  * 
- * @author chglee
- * @email 1992lcg@163.com
+* @author fei
  * @date 2020-03-30 21:46:03
  */
 public class TrainDO implements Serializable {

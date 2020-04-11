@@ -79,7 +79,7 @@ public class LoginController extends BaseController {
 
 //        try {
 //            //从session中获取随机数
-//            String random = (String) request.getSession().getAttribute(RandomValidateCodeUtil.RANDOMCODEKEY);
+            String random = (String) request.getSession().getAttribute(RandomValidateCodeUtil.RANDOMCODEKEY);
 //            if (StringUtils.isBlank(verify)) {
 //                return R.error("请输入验证码");
 //            }

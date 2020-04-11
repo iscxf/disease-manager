@@ -65,6 +65,23 @@ public class PersonalHealthDo implements Serializable {
 	public PersonalHealthDo() {
 	}
 
+	public PersonalHealthDo(String sex, Date birth, Double height, Double weight, Double systolicPressure, Double diastolicPressure, Double fastingBloodGlucose,
+							Double postprandialBloodGlucose, Double totalCholesterol, Double triglyceride, String whetherDiabetes, String familialInheritance, String thickSebum) {
+		this.sex = sex;
+		this.birth = birth;
+		this.height = height;
+		this.weight = weight;
+		this.systolicPressure = systolicPressure;
+		this.diastolicPressure = diastolicPressure;
+		this.fastingBloodGlucose = fastingBloodGlucose;
+		this.postprandialBloodGlucose = postprandialBloodGlucose;
+		this.totalCholesterol = totalCholesterol;
+		this.triglyceride = triglyceride;
+		this.whetherDiabetes = whetherDiabetes;
+		this.familialInheritance = familialInheritance;
+		this.thickSebum = thickSebum;
+	}
+
 	public PersonalHealthDo(String name, String identity, String sex, Date birth, Integer averageSmoking, Double height, Double weight, String address, String moblie, String educationalLevel,
 							String maritalStatus, Double systolicPressure, Double diastolicPressure, Double fastingBloodGlucose, Double postprandialBloodGlucose,
 							Double totalCholesterol, Double triglyceride, String whetherDiabetes, String familialInheritance, String thickSebum) {

@@ -128,12 +128,26 @@ function load() {
 									title : '餐后血糖(mmol/l)'
 								},
 																{
-									field : 'whetherDiabetes', 
-									title : '是否糖尿病' 
+									field : 'familialInheritance',
+									title : '是否有家族遗传',
+									formatter :  function(value, row, index) {
+										if (value == '0') {
+											return '<span class=" ">否</span>';
+										} else if (value == '1') {
+											return '<span class=" ">是</span>';
+										}
+									}
 								},
 																{
 									field : 'thickSebum', 
-									title : '过厚皮脂' 
+									title : '过厚皮脂' ,
+									formatter :  function(value, row, index) {
+                                        if (value == '0') {
+                                            return '<span class=" ">否</span>';
+                                        } else if (value == '1') {
+                                            return '<span class=" ">是</span>';
+                                        }
+									}
 								},
 																{
 									field : 'createTime', 

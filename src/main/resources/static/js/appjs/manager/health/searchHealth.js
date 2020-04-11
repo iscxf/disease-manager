@@ -128,12 +128,26 @@ function load() {
 									title : '餐后血糖(mmol/l)'
 								},
 																{
-									field : 'whetherDiabetes', 
-									title : '是否糖尿病' 
+									field : 'familialInheritance',
+									title : '是否有家族遗传',
+									formatter :  function(value, row, index) {
+										if (value == '0') {
+											return '<span class=" ">否</span>';
+										} else if (value == '1') {
+											return '<span class=" ">是</span>';
+										}
+									}
 								},
 																{
 									field : 'thickSebum', 
-									title : '过厚皮脂' 
+									title : '过厚皮脂' ,
+									formatter :  function(value, row, index) {
+										if (value == '0') {
+											return '<span class=" ">否</span>';
+										} else if (value == '1') {
+											return '<span class=" ">是</span>';
+										}
+									}
 								},
 																{
 									field : 'createTime', 
@@ -163,17 +177,27 @@ function searchPersonal() {
 	}else {
         parent.$(":radio[name='sex'][value='女']").attr("checked","checked");
 	}
+    parent.$('#birth').val(rows[0].birth);
+    parent.$('#height').val(rows[0].height);
+    parent.$('#weight').val(rows[0].weight);
+
     parent.$('#systolicPressure').val(rows[0].systolicPressure);
     parent.$('#diastolicPressure').val(rows[0].diastolicPressure);
     parent.$('#totalCholesterol').val(rows[0].totalCholesterol);
     parent.$('#triglyceride').val(rows[0].triglyceride);
-    parent.$('#fastingBloodGlucose').val(rows[0].systolicPressure);
+    parent.$('#fastingBloodGlucose').val(rows[0].fastingBloodGlucose);
     parent.$('#postprandialBloodGlucose').val(rows[0].postprandialBloodGlucose);
     if (rows[0].thickSebum === "0") {
         parent.$(":radio[name='thickSebum'][value='0']").attr("checked","checked");
         // parent.$('input:radio').eq(0).attr('checked', 'true');
     }else {
         parent.$(":radio[name='thickSebum'][value='1']").attr("checked","checked");
+    }
+    if (rows[0].familialInheritance === "0") {
+        parent.$(":radio[name='familialInheritance'][value='0']").attr("checked","checked");
+        // parent.$('input:radio').eq(0).attr('checked', 'true');
+    }else {
+        parent.$(":radio[name='familialInheritance'][value='1']").attr("checked","checked");
     }
 
     var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引

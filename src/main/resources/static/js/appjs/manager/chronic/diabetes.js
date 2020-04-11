@@ -80,10 +80,10 @@ function load() {
                                 field : 'postprandialBloodGlucose',
                                 title : '餐后血糖(mmol/l)'
                             },
-                            {
-                                field : 'whetherDiabetes',
-                                title : '是否糖尿病'
-                            },
+                            // {
+                            //     field : 'whetherDiabetes',
+                            //     title : '是否糖尿病'
+                            // },
 																{
 									field : 'createTime', 
 									title : '创建时间' 

@@ -13,7 +13,7 @@ function calculateData() {
         cache : true,
         type : "POST",
         url : "/manager/chronic/algorithmicPrediction/calculateData",
-        data : $('#signupForm').serialize(),// 你的formid
+        data : $('#signupForm').serialize(),
         async : false,
         error : function(request) {
             parent.layer.alert("Connection error");
@@ -33,15 +33,16 @@ function ajaxInfoHtml(data) {
     var yes = data.yes;
     var no = data.no;
     var result = data.result;
-    if (result == yes) {
-        result = "预测患有糖尿病";
+    if (result === "yes") {
+        result = "预测患有糖尿病概率大";
     }else {
-        result = "预测没有患有糖尿病";
+        result = "预测没有患有糖尿病概率大";
     }
     var htmlText ='<div id="predictResult" class="text-left col-sm-11 excerpt"><h4> 预测结果：'+ result +'</h4><h4> 患糖尿病概率：'+ yes +'</h4><h4> 不患糖尿病概率：'+ no +'</h4></div>';
+    $("#predictResult").remove();
+    $("#ajaxHtmlResult").append(htmlText);
 
-
-    var symptomHtmlText = "<h4 class=\"text-center col-sm-12\">其他符合症状的疾病</h4>";
+    var symptomHtmlText = '<h4 class="text-center col-sm-12" id="disease_content_header">其他符合症状可能疾病</h4>';
     var rows = data.symptomResult;
     for (i = 0; i < rows.length; i++) {
         symptomHtmlText += '<div class="excerpt disease_content">';
@@ -59,10 +60,8 @@ function ajaxInfoHtml(data) {
         symptomHtmlText += '</div>';
     }
     $(".disease_content").remove();
+    $("#disease_content_header").remove();
     $("#disease_content_div").append(symptomHtmlText);
-
-    $("#predictResult").remove();
-    $("#ajaxHtmlResult").append(htmlText);
 }
 
 function showDetail(obj){

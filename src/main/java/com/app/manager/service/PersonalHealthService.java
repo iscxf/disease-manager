@@ -41,13 +41,19 @@ public interface PersonalHealthService {
 	 */
 	R randomCreateInfo();
 
+	/**
+	 * 生成随机训练库信息
+	 * @return
+	 */
+	R randomCreateTrainData();
+
 	R forecastData(PredictParam param);
 
 	/**
 	 * 抓取训练数据
 	 * @return
 	 */
-	List<List<String>> fetchTrainData(Map<String, Object> param);
+	List<List<String>> fetchTrainData(Map<String, Object> param, List<String> testList);
 
 
 }

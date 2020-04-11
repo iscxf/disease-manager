@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.app.manager.dao.TrainDataDao">
+
+	<select id="get" resultType="com.app.manager.domain.PersonalHealthDo">
+		select `id`,`sex`,`birth`,`height`,`weight`,`systolic_pressure`,`diastolic_pressure`,`fasting_blood_glucose`,`postprandial_blood_glucose`,`whether_diabetes`,`familial_inheritance`,`total_cholesterol`,`triglyceride`,`thick_sebum`,`create_time`,`update_time` from train_data where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.app.manager.domain.PersonalHealthDo">
+		select `id`,`sex`,`birth`,`height`,`weight`,`systolic_pressure`,`diastolic_pressure`,`fasting_blood_glucose`,`postprandial_blood_glucose`,`whether_diabetes`,`familial_inheritance`,`total_cholesterol`,`triglyceride`,`thick_sebum`,`create_time`,`update_time` from train_data
+        <where>
+					<if test="id != null and id != ''"> and id = #{id} </if>
+					<if test="sex != null and sex != ''"> and sex = #{sex} </if>
+					<if test="birth != null and birth != ''"> and birth = #{birth} </if>
+					<if test="height != null and height != ''"> and height = #{height} </if>
+					<if test="weight != null and weight != ''"> and weight = #{weight} </if>
+					<if test="systolicPressure != null and systolicPressure != ''"> and systolic_pressure >= #{systolicPressure} </if>
+					<if test="diastolicPressure != null and diastolicPressure != ''"> and diastolic_pressure >= #{diastolicPressure} </if>
+					<if test="fastingBloodGlucose != null and fastingBloodGlucose != ''"> and fasting_blood_glucose >= #{fastingBloodGlucose} </if>
+					<if test="postprandialBloodGlucose != null and postprandialBloodGlucose != ''"> and postprandial_blood_glucose >= #{postprandialBloodGlucose} </if>
+					<if test="totalCholesterol != null nd totalCholesterol != ''">`total_cholesterol` = #{totalCholesterol}, </if>
+					<if test="triglyceride != null and triglyceride != ''">`triglyceride` = #{triglyceride}, </if>
+					<if test="familialInheritance != null and familialInheritance != ''">`familial_inheritance` = #{familialInheritance}, </if>
+					<if test="whetherDiabetes != null and whetherDiabetes != ''"> and whether_diabetes = #{whetherDiabetes} </if>
+					<if test="thickSebum != null and thickSebum != ''"> and thick_sebum = #{thickSebum} </if>
+					<if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+					<if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from train_data
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="sex != null and sex != ''"> and sex = #{sex} </if>
+		  		  <if test="birth != null and birth != ''"> and birth = #{birth} </if>
+		  		  <if test="height != null and height != ''"> and height = #{height} </if>
+		  		  <if test="weight != null and weight != ''"> and weight = #{weight} </if>
+				 <if test="systolicPressure != null and systolicPressure != ''"> and systolic_pressure >= #{systolicPressure} </if>
+				 <if test="diastolicPressure != null and diastolicPressure != ''"> and diastolic_pressure >= #{diastolicPressure} </if>
+				 <if test="fastingBloodGlucose != null and fastingBloodGlucose != ''"> and fasting_blood_glucose >= #{fastingBloodGlucose} </if>
+				 <if test="postprandialBloodGlucose != null and postprandialBloodGlucose != ''"> and postprandial_blood_glucose >= #{postprandialBloodGlucose} </if>
+				 <if test="totalCholesterol != null nd totalCholesterol != ''">`total_cholesterol` = #{totalCholesterol}, </if>
+				 <if test="triglyceride != null and triglyceride != ''">`triglyceride` = #{triglyceride}, </if>
+				 <if test="familialInheritance != null and familialInheritance != ''">`familial_inheritance` = #{familialInheritance}, </if>
+		  		  <if test="whetherDiabetes != null and whetherDiabetes != ''"> and whether_diabetes = #{whetherDiabetes} </if>
+		  		  <if test="thickSebum != null and thickSebum != ''"> and thick_sebum = #{thickSebum} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.app.manager.domain.PersonalHealthDo" useGeneratedKeys="true" keyProperty="id">
+		insert into train_data
+		(
+			`sex`, 
+			`birth`,
+			`height`, 
+			`weight`,
+			`systolic_pressure`, 
+			`diastolic_pressure`, 
+			`fasting_blood_glucose`, 
+			`postprandial_blood_glucose`, 
+			`whether_diabetes`,
+			`familial_inheritance`,
+			`thick_sebum`,
+			`total_cholesterol`,
+			`triglyceride`
+		)
+		values
+		(
+			#{sex}, 
+			#{birth},
+			#{height}, 
+			#{weight},
+			#{systolicPressure}, 
+			#{diastolicPressure}, 
+			#{fastingBloodGlucose}, 
+			#{postprandialBloodGlucose}, 
+			#{whetherDiabetes},
+			#{familialInheritance},
+			#{thickSebum},
+			#{totalCholesterol},
+			#{triglyceride}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.app.manager.domain.PersonalHealthDo">
+		update train_data
+		<set>
+			<if test="sex != null">`sex` = #{sex}, </if>
+			<if test="birth != null">`birth` = #{birth}, </if>
+			<if test="height != null">`height` = #{height}, </if>
+			<if test="weight != null">`weight` = #{weight}, </if>
+			<if test="systolicPressure != null">`systolic_pressure` = #{systolicPressure}, </if>
+			<if test="diastolicPressure != null">`diastolic_pressure` = #{diastolicPressure}, </if>
+			<if test="fastingBloodGlucose != null">`fasting_blood_glucose` = #{fastingBloodGlucose}, </if>
+			<if test="postprandialBloodGlucose != null">`postprandial_blood_glucose` = #{postprandialBloodGlucose}, </if>
+			<if test="whetherDiabetes != null">`whether_diabetes` = #{whetherDiabetes}, </if>
+			<if test="familialInheritance != null">`familial_inheritance` = #{familialInheritance}, </if>
+			<if test="totalCholesterol != null">`total_cholesterol` = #{totalCholesterol}, </if>
+			<if test="triglyceride != null">`triglyceride` = #{triglyceride}, </if>
+			<if test="thickSebum != null">`thick_sebum` = #{thickSebum}, </if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<select id="fetchData" resultType="com.app.manager.domain.PersonalHealthDo">
+	select `sex`,`birth`,`height`,`weight`,`systolic_pressure`,`diastolic_pressure`,`fasting_blood_glucose`,`postprandial_blood_glucose`,`whether_diabetes`,`familial_inheritance`,`total_cholesterol`,`triglyceride`,`thick_sebum` from train_data
+	<where>
+	</where>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+</mapper>

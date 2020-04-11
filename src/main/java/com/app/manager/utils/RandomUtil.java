@@ -1,8 +1,11 @@
 package com.app.manager.utils;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 /**
  * 随机生成中文姓名，性别，Email，手机号，住址
@@ -187,6 +190,23 @@ public class RandomUtil {
     }
 
     /**
+     * 产生服从正态分布的随机数
+     * @param standardDeviation 标准差σ
+     * @param mathematicalExpectation  数学期望 μ
+     * @return
+     */
+    public static Double getDistributed(int standardDeviation, Double mathematicalExpectation, int scale){
+        Random r = new Random();
+        double randomNum = r.nextGaussian() * Math.sqrt(standardDeviation) + mathematicalExpectation;
+        while (randomNum < 0){
+            randomNum = r.nextGaussian() * Math.sqrt(standardDeviation) + mathematicalExpectation;
+        }
+        BigDecimal bg = new BigDecimal(randomNum);
+        randomNum = bg.setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return randomNum;
+    }
+
+    /**
      * 生成指定范围随机数
      *
      * @param start
@@ -198,25 +218,35 @@ public class RandomUtil {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
-            String[] xmTmp = getName().split(",");
-            String xm = xmTmp[1];//姓名
-            String xb = xmTmp[0];//性别 1男、2女
-            String[] sfzTmp = getIdentityAndBirth("4806", "1940-1-1", "2018-12-31").split(",");
-            String birth = sfzTmp[0]; //出生日期
-            String identity = sfzTmp[1]; //身份证号
-            String tel = getTel(); //手机号
-            String email = getEmail(6, 18); //邮箱
-            Double doubleNum = getDoubleNum(8, 10, 2);
-            Integer educationalLevel = getIntNum(4); //文化程度 01-4
 
-            System.out.println(xm);
-            System.out.println(xb);
-            System.out.println(birth);
-            System.out.println(tel);
-            System.out.println(identity);
-            System.out.println(doubleNum);
+
+        Random r = new Random();
+        for (int i = 0; i < 1; i++) {
+            Double gau = r.nextGaussian() * Math.sqrt(5) + 10;
+            System.out.println(gau);
         }
+
+//        for (int i = 0; i < 10; i++) {
+//            String[] xmTmp = getName().split(",");
+//            String xm = xmTmp[1];//姓名
+//            String xb = xmTmp[0];//性别 1男、2女
+//            String[] sfzTmp = getIdentityAndBirth("4806", "1940-1-1", "2018-12-31").split(",");
+//            String birth = sfzTmp[0]; //出生日期
+//            String identity = sfzTmp[1]; //身份证号
+//            String tel = getTel(); //手机号
+//            String email = getEmail(6, 18); //邮箱
+//            Double doubleNum = getDoubleNum(8, 10, 2);
+//            Integer educationalLevel = getIntNum(4); //文化程度 01-4
+//
+//            System.out.println(xm);
+//            System.out.println(xb);
+//            System.out.println(birth);
+//            System.out.println(tel);
+//            System.out.println(identity);
+//            System.out.println(doubleNum);
+//        }
     }
+
+
 
 }

@@ -1,5 +1,7 @@
 package com.app.manager.domain.model;
 
+import java.util.Date;
+
 /**
  * @author chenxf
  * Created on 2020/3/25
@@ -7,6 +9,12 @@ package com.app.manager.domain.model;
 public class PredictParam {
     //性别
     private String sex;
+    //出生日期
+    private Date birth;
+    //身高
+    private Double height;
+    //体重
+    private Double weight;
     //收缩压
     private Double systolicPressure;
     //舒张压
@@ -28,12 +36,57 @@ public class PredictParam {
     //症状
     private String symptom;
 
+    public PredictParam() {
+    }
+
+    public PredictParam(String sex, Date birth, Double height, Double weight, Double systolicPressure, Double diastolicPressure, Double fastingBloodGlucose, Double postprandialBloodGlucose,
+                        Double totalCholesterol, Double triglyceride, String whetherDiabetes, String familialInheritance, String thickSebum, String symptom) {
+        this.sex = sex;
+        this.birth = birth;
+        this.height = height;
+        this.weight = weight;
+        this.systolicPressure = systolicPressure;
+        this.diastolicPressure = diastolicPressure;
+        this.fastingBloodGlucose = fastingBloodGlucose;
+        this.postprandialBloodGlucose = postprandialBloodGlucose;
+        this.totalCholesterol = totalCholesterol;
+        this.triglyceride = triglyceride;
+        this.whetherDiabetes = whetherDiabetes;
+        this.familialInheritance = familialInheritance;
+        this.thickSebum = thickSebum;
+        this.symptom = symptom;
+    }
+
     public String getSex() {
         return sex;
     }
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    public Double getHeight() {
+        return height;
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
     public Double getSystolicPressure() {
